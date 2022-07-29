@@ -1,18 +1,28 @@
-async function paintArray(arr, ms) {
+async function drawArray(arr, ms) {
   for (let i = 0; i < arr.length; i++) {
     await sleep(ms);
     line(
       global.blockWidth * i,
-      height - global.blockHeight * arr[i],
+      height,
       global.blockWidth * i,
-      height
+      height - global.blockHeight * arr[i]
     );
   }
 }
 
 function drawLines(arr, x, y) {
-  line(global.blockWidth * x, height - global.blockHeight * arr[x], global.blockWidth * x, height);
-  line(global.blockWidth * y, height - global.blockHeight * arr[y], global.blockWidth * y, height);
+  line(
+    global.blockWidth * x,
+    height - global.blockHeight * arr[x],
+    global.blockWidth * x,
+    height
+  );
+  line(
+    global.blockWidth * y,
+    height - global.blockHeight * arr[y],
+    global.blockWidth * y,
+    height
+  );
 }
 
 function drawLine(arr, index) {
@@ -54,6 +64,16 @@ function swapAndDraw(arr, x, y) {
   arr[y] = temp;
 
   stroke("white");
-  line(global.blockWidth * x, height - global.blockHeight * arr[x], global.blockWidth * x, height);
-  line(global.blockWidth * y, height - global.blockHeight * arr[y], global.blockWidth * y, height);
+  line(
+    global.blockWidth * x,
+    height - global.blockHeight * arr[x],
+    global.blockWidth * x,
+    height
+  );
+  line(
+    global.blockWidth * y,
+    height - global.blockHeight * arr[y],
+    global.blockWidth * y,
+    height
+  );
 }

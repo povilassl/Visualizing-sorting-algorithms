@@ -28,5 +28,5 @@ async function draw() {
   translate(1, 1);
   background("black");
   stroke("white");
-  await paintArray(global.array, global.delay);
+  await drawArray(global.array, global.delay);
 }

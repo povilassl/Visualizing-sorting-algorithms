@@ -76,7 +76,7 @@ async function selectionSort(arr, ms) {
   return [comparisons, arrayAccess];
 }
 
-async function conctailSort(arr, ms) {
+async function coctailSort(arr, ms) {
   let comparisons = 0;
   let arrayAccess = 0;
   let swapped = true;
@@ -112,6 +112,30 @@ async function conctailSort(arr, ms) {
     }
 
     ++start;
+  }
+
+  return [comparisons, arrayAccess];
+}
+
+async function gnomeSort(arr, ms) {
+  let comparisons = 0;
+  let arrayAccess = 0;
+
+  let index = 0;
+
+  while (index < arr.length) {
+    if (index == 0) {
+      index++;
+    } else if (arr[index] >= arr[index - 1]) {
+      index++;
+    } else {
+      await sleep(ms);
+      swapAndDraw(arr, index, index - 1);
+      index--;
+      arrayAccess += 4;
+    }
+    comparisons++;
+    arrayAccess += 2; // in else if
   }
 
   return [comparisons, arrayAccess];

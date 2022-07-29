@@ -1,5 +1,8 @@
 function initButtons() {
-  button = createButton("Shuffle Array");
+  button = createButton("New Array");
+  button.mouseClicked(newArrayButton);
+
+  button = createButton("Durstenfeld Shuffle");
   button.mouseClicked(durstenfeldButton);
 
   button = createButton("Bubble Sort");
@@ -12,7 +15,10 @@ function initButtons() {
   button.mouseClicked(insertionButton);
 
   button = createButton("Coctail Sort");
-  button.mouseClicked(conctailButton);
+  button.mouseClicked(coctailButton);
+
+  button = createButton("Gnome Sort");
+  button.mouseClicked(gnomeButton);
 }
 
 function printResults(message, ret, time) {
@@ -30,6 +36,12 @@ function printResults(message, ret, time) {
       time +
       "ms"
   );
+}
+
+async function newArrayButton() {
+  global.array = fillArrayDefaultValues(global.nrOfValues);
+  background("black");
+  await drawArray(global.array, global.delay);
 }
 
 async function insertionButton() {
@@ -60,9 +72,16 @@ async function durstenfeldButton() {
   printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
 }
 
-async function conctailButton() {
+async function coctailButton() {
   let startTime = new Date();
-  let ret = await conctailSort(global.array, global.delay);
+  let ret = await coctailSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Coctail sort: ", ret, endTime - startTime);
+}
+
+async function gnomeButton() {
+  let startTime = new Date();
+  let ret = await gnomeSort(global.array, global.delay);
+  let endTime = new Date();
+  printResults("Gnome sort: ", ret, endTime - startTime);
 }
