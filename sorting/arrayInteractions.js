@@ -10,6 +10,34 @@ async function paintArray(arr, ms) {
   }
 }
 
+function drawLines(arr, x, y) {
+  line(
+    global.blockWidth * x,
+    height - global.blockHeight * arr[x],
+    global.blockWidth * x,
+    height
+  );
+  line(
+    global.blockWidth * y,
+    height - global.blockHeight * arr[y],
+    global.blockWidth * y,
+    height
+  );
+}
+
+function drawLine(arr, index) {
+  stroke("black");
+  line(global.blockWidth * index, height, global.blockWidth * index, 0);
+
+  stroke("white");
+  line(
+    global.blockWidth * index,
+    height,
+    global.blockWidth * index,
+    height - global.blockHeight * arr[index]
+  );
+}
+
 function fillArrayDefaultValues(nr) {
   let arr = [];
   for (let i = 0; i < nr; i++) {

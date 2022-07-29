@@ -10,6 +10,30 @@ function shuffleArray(arr) {
   global.array = arr;
 }
 
+async function insertionSort(arr, ms) {
+  let key, j;
+  let comparisons = 0;
+  let swaps = 0;
+  for (let i = 1; i < arr.length; i++) {
+    key = arr[i];
+    j = i - 1;
+    while (j >= 0 && arr[j] > key) {
+      comparisons++;
+      // swaps++;
+      await sleep(ms);
+      arr[j + 1] = arr[j];
+      drawLine(arr, j + 1);
+      j = j - 1;
+    }
+    comparisons++;
+    arr[j + 1] = key;
+    drawLine(arr, j + 1);
+  }
+
+  global.array = arr;
+  return [comparisons, -1];
+}
+
 async function bubbleSort(arr, ms) {
   let comparisons = 0;
   let swaps = 0;
