@@ -10,4 +10,5 @@ Done so far:
 TODO:
 
 - Better logic for drawing lines
-- Replace 'swap' with 'array access'
+- Blocking of multiple sorts at the same time
+- Add time

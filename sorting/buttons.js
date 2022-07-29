@@ -1,6 +1,6 @@
 function initButtons() {
   button = createButton("Shuffle Array");
-  button.mouseClicked(shuffleButton);
+  button.mouseClicked(durstenfeldButton);
 
   button = createButton("Bubble Sort");
   button.mouseClicked(bubbleButton);
@@ -12,31 +12,28 @@ function initButtons() {
   button.mouseClicked(insertionButton);
 }
 
-function printResults(name, ret) {
-  console.log(name + " sort: ");
-  console.log(global.array);
-  console.log("comparisons = " + ret[0] + ", swaps = " + ret[1]);
+function printResults(message, ret) {
+  console.log(message);
+  // console.log(global.array);
+  console.log("comparisons = " + ret[0] + ", array access = " + ret[1]);
 }
 
 async function insertionButton() {
   let ret = await insertionSort(global.array, global.delay);
-  printResults("Insertion", ret);
+  printResults("Insertion sort: ", ret);
 }
 
 async function bubbleButton() {
   let ret = await bubbleSort(global.array, global.delay);
-  printResults("Bubble", ret);
+  printResults("Bubble sort: ", ret);
 }
 
 async function selectionButton() {
   let ret = await selectionSort(global.array, global.delay);
-  printResults("Selection", ret);
+  printResults("Selection sort: ", ret);
 }
 
-async function shuffleButton() {
-  shuffleArray(global.array);
-  console.log("shuffled array: ");
-  console.log(global.array);
-  background("black");
-  await paintArray(global.array, global.delay);
+async function durstenfeldButton() {
+  let ret = await durstenfeldShuffle(global.array, global.delay);
+  printResults("Durstenfeld shuffle: ", ret);
 }
