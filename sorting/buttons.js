@@ -10,6 +10,9 @@ function initButtons() {
 
   button = createButton("Insertion Sort");
   button.mouseClicked(insertionButton);
+
+  button = createButton("Coctail Sort");
+  button.mouseClicked(conctailButton);
 }
 
 function printResults(message, ret, time) {
@@ -55,4 +58,11 @@ async function durstenfeldButton() {
   let ret = await durstenfeldShuffle(global.array, global.delay);
   let endTime = new Date();
   printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
+}
+
+async function conctailButton() {
+  let startTime = new Date();
+  let ret = await conctailSort(global.array, global.delay);
+  let endTime = new Date();
+  printResults("Coctail sort: ", ret, endTime - startTime);
 }

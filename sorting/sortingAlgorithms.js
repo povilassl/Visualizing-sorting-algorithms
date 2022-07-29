@@ -44,13 +44,13 @@ async function bubbleSort(arr, ms) {
   let arrayAccess = 0;
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
-      comparisons++;
-      arrayAccess += 2;
       if (arr[j] > arr[j + 1]) {
-        await sleep(ms);
+        // await sleep(ms);
         swapAndDraw(arr, j, j + 1);
         arrayAccess += 4;
       }
+      comparisons++;
+      arrayAccess += 2;
     }
   }
   return [comparisons, arrayAccess];
@@ -66,12 +66,53 @@ async function selectionSort(arr, ms) {
     min = i; // get index
     for (let j = i; j < n; j++) {
       await sleep(ms);
-      comparisons++;
       if (arr[j] < arr[min]) {
         swapAndDraw(arr, j, min);
         arrayAccess += 4;
       }
+      comparisons++;
     }
   }
+  return [comparisons, arrayAccess];
+}
+
+async function conctailSort(arr, ms) {
+  let comparisons = 0;
+  let arrayAccess = 0;
+  let swapped = true;
+  let start = 0;
+  let end = arr.length - 1;
+
+  while (swapped) {
+    for (let i = start; i < end; ++i) {
+      if (arr[i] > arr[i + 1]) {
+        await sleep(ms);
+        swapAndDraw(arr, i, i + 1);
+        arrayAccess += 4;
+        swapped = true;
+      }
+      comparisons++;
+      arrayAccess += 2;
+    }
+
+    if (!swapped) break;
+
+    swapped = false;
+    --end;
+
+    for (let i = end - 1; i >= start; --i) {
+      if (arr[i] > arr[i + 1]) {
+        await sleep(ms);
+        swapAndDraw(arr, i, i + 1);
+        arrayAccess += 4;
+        swapped = true;
+      }
+      comparisons++;
+      arrayAccess += 2;
+    }
+
+    ++start;
+  }
+
   return [comparisons, arrayAccess];
 }
