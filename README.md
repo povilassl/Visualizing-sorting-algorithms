@@ -9,6 +9,7 @@ Done so far:
 
 TODO:
 
-- Better logic for drawing lines
-- Blocking of multiple sorts at the same time
-- Add time
+- Better logic for drawing lines?
+- Blocking of multiple processes at the same time
+- Update display of buttons / info
+- Check if there are better ways of handling delay

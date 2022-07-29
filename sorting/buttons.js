@@ -12,28 +12,47 @@ function initButtons() {
   button.mouseClicked(insertionButton);
 }
 
-function printResults(message, ret) {
-  console.log(message);
+function printResults(message, ret, time) {
   // console.log(global.array);
-  console.log("comparisons = " + ret[0] + ", array access = " + ret[1]);
+  console.log(
+    message +
+      "comparisons = " +
+      ret[0] +
+      ", array access = " +
+      ret[1] +
+      ", delay = " +
+      global.delay +
+      "ms" +
+      ", time elapsed = " +
+      time +
+      "ms"
+  );
 }
 
 async function insertionButton() {
+  let startTime = new Date();
   let ret = await insertionSort(global.array, global.delay);
-  printResults("Insertion sort: ", ret);
+  let endTime = new Date();
+  printResults("Insertion sort: ", ret, endTime - startTime);
 }
 
 async function bubbleButton() {
+  let startTime = new Date();
   let ret = await bubbleSort(global.array, global.delay);
-  printResults("Bubble sort: ", ret);
+  let endTime = new Date();
+  printResults("Bubble sort: ", ret, endTime - startTime);
 }
 
 async function selectionButton() {
+  let startTime = new Date();
   let ret = await selectionSort(global.array, global.delay);
-  printResults("Selection sort: ", ret);
+  let endTime = new Date();
+  printResults("Selection sort: ", ret, endTime - startTime);
 }
 
 async function durstenfeldButton() {
+  let startTime = new Date();
   let ret = await durstenfeldShuffle(global.array, global.delay);
-  printResults("Durstenfeld shuffle: ", ret);
+  let endTime = new Date();
+  printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
 }

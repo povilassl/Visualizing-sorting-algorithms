@@ -19,7 +19,7 @@ async function initGlobal() {
   global.blockHeight = Math.floor(width / global.nrOfValues);
   global.blockWidth = Math.floor(height / global.nrOfValues);
   global.array = fillArrayDefaultValues(global.nrOfValues);
-  global.delay = 0;
+  global.delay = 10;
 }
 
 let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
