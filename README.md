@@ -5,6 +5,7 @@ Done so far:
 - Durstenfeld Shuffle
 - Bubble Sort
 - Selection Sort
+- Insertion Sort
 
 TODO:
 
