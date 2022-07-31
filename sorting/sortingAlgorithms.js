@@ -63,15 +63,17 @@ async function selectionSort(arr, ms) {
   let n = arr.length;
 
   for (let i = 0; i < n - 1; i++) {
-    min = i; // get index
-    for (let j = i; j < n; j++) {
-      await sleep(ms);
+    min = i;
+    for (let j = i + 1; j < n; j++) {
       if (arr[j] < arr[min]) {
-        swapAndDraw(arr, j, min);
-        arrayAccess += 4;
+        min = j;
       }
       comparisons++;
+      arrayAccess += 2;
     }
+    await sleep(ms);
+    swapAndDraw(arr, min, i);
+    arrayAccess += 4;
   }
   return [comparisons, arrayAccess];
 }
