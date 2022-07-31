@@ -8,6 +8,7 @@ Done so far:
 - Insertion Sort
 - Coctail Sort
 - Gnome Sort
+- Merge Sort
 
 TODO:
 
@@ -15,3 +16,4 @@ TODO:
 - Blocking of multiple processes at the same time
 - Update display of buttons / info
 - Check if there are better ways of handling delay
+- Move all delays to global.delay?

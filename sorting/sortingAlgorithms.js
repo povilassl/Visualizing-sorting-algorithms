@@ -142,3 +142,93 @@ async function gnomeSort(arr, ms) {
 
   return [comparisons, arrayAccess];
 }
+
+async function merge(array, left, mid, right, comparisons, arrayAccess) {
+  const subArrayOne = mid - left + 1;
+  const subArrayTwo = right - mid;
+
+  let leftArray = [];
+  let rightArray = [];
+
+  for (let i = 0; i < subArrayOne; i++) {
+    leftArray[i] = array[left + i];
+    arrayAccess += 2;
+  }
+  for (let i = 0; i < subArrayTwo; i++) {
+    rightArray[i] = array[mid + i + 1];
+    arrayAccess += 2;
+  }
+
+  let indexOfSubArrayOne = 0;
+  let indexOfSubArrayTwo = 0;
+  let indexOfMergedArray = left;
+
+  while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+    comparisons += 2;
+    if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) {
+      array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+      indexOfSubArrayOne++;
+    } else {
+      array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+      indexOfSubArrayTwo++;
+    }
+
+    arrayAccess += 4;
+    await sleep(global.delay);
+    drawLine(array, indexOfMergedArray);
+    indexOfMergedArray++;
+  }
+  comparisons++;
+
+  //copy elements from left array, if there are any
+  while (indexOfSubArrayOne < subArrayOne) {
+    comparisons++;
+    array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+    arrayAccess += 2;
+    await sleep(global.delay);
+    drawLine(array, indexOfMergedArray);
+    indexOfSubArrayOne++;
+    indexOfMergedArray++;
+  }
+  comparisons++;
+
+  //copy elements from right array, if there are any
+  while (indexOfSubArrayTwo < subArrayTwo) {
+    comparisons++;
+    array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+    arrayAccess += 2;
+    await sleep(global.delay);
+    drawLine(array, indexOfMergedArray);
+    indexOfSubArrayTwo++;
+    indexOfMergedArray++;
+  }
+  comparisons++;
+
+  return [comparisons, arrayAccess];
+}
+
+async function mergeSort(arr, left, right, comparisons, arrayAccess) {
+  if (left >= right) return [0, 0];
+
+  let ret;
+  let mid = left + parseInt((right - left) / 2);
+  ret = await mergeSort(arr, left, mid, 0, 0);
+  comparisons += ret[0];
+  arrayAccess += ret[1];
+
+  ret = await mergeSort(arr, mid + 1, right, 0, 0);
+  comparisons += ret[0];
+  arrayAccess += ret[1];
+
+  ret = await merge(arr, left, mid, right, 0, 0);
+  comparisons += ret[0];
+  arrayAccess += ret[1];
+
+  return [comparisons, arrayAccess];
+}
+
+// works with global delay, passing ms is useless
+async function mergeSortStart(arr, ms) {
+  // pass array, start, end, nr of comparisons, nr of array accesses
+  return await mergeSort(arr, 0, arr.length - 1, 0, 0);
+}

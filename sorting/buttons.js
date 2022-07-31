@@ -19,6 +19,9 @@ function initButtons() {
 
   button = createButton("Gnome Sort");
   button.mouseClicked(gnomeButton);
+
+  button = createButton("Merge Sort");
+  button.mouseClicked(mergeButton);
 }
 
 function printResults(message, ret, time) {
@@ -84,4 +87,11 @@ async function gnomeButton() {
   let ret = await gnomeSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Gnome sort: ", ret, endTime - startTime);
+}
+
+async function mergeButton() {
+  let startTime = new Date();
+  let ret = await mergeSortStart(global.array, global.ms);
+  let endTime = new Date();
+  printResults("Merge sort: ", ret, endTime - startTime);
 }
