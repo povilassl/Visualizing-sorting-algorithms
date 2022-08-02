@@ -45,7 +45,7 @@ async function bubbleSort(arr, ms) {
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
       if (arr[j] > arr[j + 1]) {
-        // await sleep(ms);
+        await sleep(ms);
         swapAndDraw(arr, j, j + 1);
         arrayAccess += 4;
       }

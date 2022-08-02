@@ -1,6 +1,9 @@
 function initButtons() {
-  button = createButton("New Array");
-  button.mouseClicked(newArrayButton);
+  button = createButton("New Array (Linear)");
+  button.mouseClicked(newLinearArrayButton);
+
+  button = createButton("New Array (Non-Linear)");
+  button.mouseClicked(newNonLinearArray);
 
   button = createButton("Durstenfeld Shuffle");
   button.mouseClicked(durstenfeldButton);
@@ -41,8 +44,14 @@ function printResults(message, ret, time) {
   );
 }
 
-async function newArrayButton() {
-  global.array = fillArrayDefaultValues(global.nrOfValues);
+async function newLinearArrayButton() {
+  global.array = fillArrayLinearValues(global.nrOfValues);
+  background("black");
+  await drawArray(global.array, global.delay);
+}
+
+async function newNonLinearArray() {
+  global.array = fillArrayRandomValues(global.nrOfValues);
   background("black");
   await drawArray(global.array, global.delay);
 }

@@ -38,12 +38,20 @@ function drawLine(arr, index) {
   );
 }
 
-function fillArrayDefaultValues(nr) {
+function fillArrayLinearValues(nr) {
   let arr = [];
   for (let i = 0; i < nr; i++) {
     arr[i] = i;
   }
 
+  return arr;
+}
+
+function fillArrayRandomValues(nr) {
+  let arr = [];
+  for (let i = 0; i < nr; i++) {
+    arr[i] = Math.floor(Math.random() * nr);
+  }
   return arr;
 }
 

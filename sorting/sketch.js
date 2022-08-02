@@ -18,7 +18,7 @@ async function initGlobal() {
   global.nrOfValues = 100;
   global.blockHeight = Math.floor(width / global.nrOfValues);
   global.blockWidth = Math.floor(height / global.nrOfValues);
-  global.array = fillArrayDefaultValues(global.nrOfValues);
+  global.array = fillArrayLinearValues(global.nrOfValues);
   global.delay = 10;
 }
 
