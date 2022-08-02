@@ -48,69 +48,129 @@ function printResults(message, ret, time) {
 }
 
 async function newLinearArrayButton() {
-  global.array = fillArrayLinearValues(global.nrOfValues);
-  background("black");
-  await drawArray(global.array, global.delay);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    global.array = fillArrayLinearValues(global.nrOfValues);
+    background("black");
+    await drawArray(global.array, global.delay);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function newNonLinearArray() {
-  global.array = fillArrayRandomValues(global.nrOfValues);
-  background("black");
-  await drawArray(global.array, global.delay);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    global.array = fillArrayRandomValues(global.nrOfValues);
+    background("black");
+    await drawArray(global.array, global.delay);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function insertionSortButton() {
-  let startTime = new Date();
-  let ret = await insertionSort(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Insertion sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await insertionSort(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Insertion sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function bubbleSortButton() {
-  let startTime = new Date();
-  let ret = await bubbleSort(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Bubble sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await bubbleSort(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Bubble sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function selectionSortButton() {
-  let startTime = new Date();
-  let ret = await selectionSort(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Selection sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await selectionSort(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Selection sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function durstenfeldShuffleButton() {
-  let startTime = new Date();
-  let ret = await durstenfeldShuffle(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await durstenfeldShuffle(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function coctailSortButton() {
-  let startTime = new Date();
-  let ret = await coctailSort(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Coctail sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await coctailSort(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Coctail sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function gnomeSortButton() {
-  let startTime = new Date();
-  let ret = await gnomeSort(global.array, global.delay);
-  let endTime = new Date();
-  printResults("Gnome sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await gnomeSort(global.array, global.delay);
+    let endTime = new Date();
+    printResults("Gnome sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function mergeSortButton() {
-  let startTime = new Date();
-  let ret = await mergeSortStart(global.array, global.ms);
-  let endTime = new Date();
-  printResults("Merge sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await mergeSortStart(global.array, global.ms);
+    let endTime = new Date();
+    printResults("Merge sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }
 
 async function countingSortButton() {
-  let startTime = new Date();
-  let ret = await countingSort(global.array, global.ms);
-  let endTime = new Date();
-  printResults("Counting sort: ", ret, endTime - startTime);
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await countingSort(global.array, global.ms);
+    let endTime = new Date();
+    printResults("Counting sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
 }

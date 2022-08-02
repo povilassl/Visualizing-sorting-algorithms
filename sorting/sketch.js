@@ -4,6 +4,7 @@ let global = {
   blockWidth: 0,
   array: [],
   delay: 0,
+  inProgress: false,
 };
 
 async function setup() {
@@ -25,8 +26,11 @@ async function initGlobal() {
 let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function draw() {
-  translate(1, 1);
+  translate(1, 1); //TODO: remove this when fixing UI
   background("black");
   stroke("white");
+
+  global.inProgress = true;
   await drawArray(global.array, global.delay);
+  global.inProgress = false;
 }

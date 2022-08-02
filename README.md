@@ -14,8 +14,8 @@ Done so far:
 TODO:
 
 - Better logic for drawing lines?
-- Blocking of multiple processes at the same time
 - Update display of buttons / info
 - Check if there are better ways of handling delay
 - Move all delays to global.delay?
 - Recolor accessed elemets? for indication of process when nothing is replaced
+- better way of implementing function execution blocks?
