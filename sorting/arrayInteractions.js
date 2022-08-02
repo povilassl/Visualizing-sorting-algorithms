@@ -1,6 +1,6 @@
 async function drawArray(arr, ms) {
   for (let i = 0; i < arr.length; i++) {
-    await sleep(ms);
+    // await sleep(ms);
     line(
       global.blockWidth * i,
       height,

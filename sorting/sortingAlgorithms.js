@@ -4,7 +4,7 @@ async function durstenfeldShuffle(arr, ms) {
   let arrayAccess = 0;
   for (let i = arr.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
-    await sleep(ms);
+    // await sleep(ms);
     swapAndDraw(arr, i, j);
     arrayAccess += 4;
   }
@@ -23,7 +23,7 @@ async function insertionSort(arr, ms) {
     while (j >= 0 && arr[j] > key) {
       comparisons++;
       arrayAccess++;
-      await sleep(ms);
+      // await sleep(ms);
       arr[j + 1] = arr[j];
       arrayAccess += 2;
       drawLine(arr, j + 1);
@@ -45,7 +45,7 @@ async function bubbleSort(arr, ms) {
   for (let i = 0; i < arr.length - 1; i++) {
     for (let j = 0; j < arr.length - i - 1; j++) {
       if (arr[j] > arr[j + 1]) {
-        await sleep(ms);
+        // await sleep(ms);
         swapAndDraw(arr, j, j + 1);
         arrayAccess += 4;
       }
@@ -71,7 +71,7 @@ async function selectionSort(arr, ms) {
       comparisons++;
       arrayAccess += 2;
     }
-    await sleep(ms);
+    // await sleep(ms);
     swapAndDraw(arr, min, i);
     arrayAccess += 4;
   }
@@ -88,7 +88,7 @@ async function coctailSort(arr, ms) {
   while (swapped) {
     for (let i = start; i < end; ++i) {
       if (arr[i] > arr[i + 1]) {
-        await sleep(ms);
+        // await sleep(ms);
         swapAndDraw(arr, i, i + 1);
         arrayAccess += 4;
         swapped = true;
@@ -104,7 +104,7 @@ async function coctailSort(arr, ms) {
 
     for (let i = end - 1; i >= start; --i) {
       if (arr[i] > arr[i + 1]) {
-        await sleep(ms);
+        // await sleep(ms);
         swapAndDraw(arr, i, i + 1);
         arrayAccess += 4;
         swapped = true;
@@ -131,7 +131,7 @@ async function gnomeSort(arr, ms) {
     } else if (arr[index] >= arr[index - 1]) {
       index++;
     } else {
-      await sleep(ms);
+      // await sleep(ms);
       swapAndDraw(arr, index, index - 1);
       index--;
       arrayAccess += 4;
@@ -174,7 +174,7 @@ async function merge(array, left, mid, right, comparisons, arrayAccess) {
     }
 
     arrayAccess += 4;
-    await sleep(global.delay);
+    // await sleep(global.delay);
     drawLine(array, indexOfMergedArray);
     indexOfMergedArray++;
   }
@@ -197,7 +197,7 @@ async function merge(array, left, mid, right, comparisons, arrayAccess) {
     comparisons++;
     array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
     arrayAccess += 2;
-    await sleep(global.delay);
+    // await sleep(global.delay);
     drawLine(array, indexOfMergedArray);
     indexOfSubArrayTwo++;
     indexOfMergedArray++;
@@ -262,12 +262,74 @@ async function countingSort(arr, ms) {
     countArr[j] -= 1;
     sorted[countArr[j]] = arr[i];
     arrayAccess += 5;
-    await sleep(ms);
+    // await sleep(ms);
     drawLine(sorted, countArr[j]);
   }
 
   //copy sortted array to global
   global.array = sorted;
+
+  return [comparisons, arrayAccess];
+}
+
+async function countingSortForRadix(arr, n, exp, comparisons, arrayAccess) {
+  let output = new Array(n);
+  let count = new Array(10).fill(0);
+
+  //storing count of occurences
+  for (let i = 0; i < n; i++) {
+    count[Math.floor(arr[i] / exp) % 10]++;
+    arrayAccess += 2;
+  }
+
+  //changing count[i] so that it contains the actual position(index)
+  for (let i = 1; i < 10; i++) {
+    count[i] += count[i - 1];
+    arrayAccess += 2;
+  }
+
+  //building the output array
+  for (let i = n - 1; i >= 0; --i) {
+    output[count[Math.floor(arr[i] / exp) % 10] - 1] = arr[i];
+    count[Math.floor(arr[i] / exp) % 10]--;
+    arrayAccess += 6;
+  }
+
+  //copy sorted elements and draw
+  for (let i = 0; i < n; i++) {
+    global.array[i] = output[i];
+    await sleep(global.delay);
+    drawLine(global.array, i);
+  }
+
+  return [comparisons, arrayAccess];
+}
+
+async function radixSort(arr, ms) {
+  let comparisons = 0;
+  let arrayAccess = 0;
+  let ret;
+
+  //finding max element to know nr of digits
+  m = arr[0];
+  arrayAccess++;
+
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > m) {
+      m = arr[i];
+    }
+    arrayAccess++;
+  }
+
+  let n = arr.length;
+
+  //iterate every 10 elements
+  //passing array, array.length and index
+  for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10) {
+    ret = await countingSortForRadix(arr, n, exp, comparisons, arrayAccess);
+    comparisons += ret[0];
+    arrayAccess += ret[1];
+  }
 
   return [comparisons, arrayAccess];
 }

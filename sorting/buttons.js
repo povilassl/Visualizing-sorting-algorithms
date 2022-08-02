@@ -28,6 +28,9 @@ function initButtons() {
 
   button = createButton("Counting Sort");
   button.mouseClicked(countingSortButton);
+
+  button = createButton("Radix Sort");
+  button.mouseClicked(radixSortButton);
 }
 
 function printResults(message, ret, time) {
@@ -169,6 +172,19 @@ async function countingSortButton() {
     let ret = await countingSort(global.array, global.ms);
     let endTime = new Date();
     printResults("Counting sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
+}
+
+async function radixSortButton() {
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await radixSort(global.array, global.ms);
+    let endTime = new Date();
+    printResults("Radix sort: ", ret, endTime - startTime);
     global.inProgress = false;
   } else {
     console.log("Other process is currently in progress...");
