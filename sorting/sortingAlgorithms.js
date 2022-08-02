@@ -232,3 +232,42 @@ async function mergeSortStart(arr, ms) {
   // pass array, start, end, nr of comparisons, nr of array accesses
   return await mergeSort(arr, 0, arr.length - 1, 0, 0);
 }
+
+async function countingSort(arr, ms) {
+  let arrayAccess = 0;
+  let comparisons = 0;
+
+  //we ignore the fact that size could be bigger that arr.length (real uses max element instead)
+  let countArr = new Array(arr.length).fill(0);
+
+  //counting instances of elements
+  for (let i = 0; i < arr.length; i++) {
+    j = arr[i]; // key
+    countArr[j] += 1;
+    arrayAccess += 2;
+  }
+
+  //adjusting index by adding all previous elements
+  for (let i = 1; i < arr.length; i++) {
+    countArr[i] += countArr[i - 1];
+    arrayAccess += 2;
+  }
+
+  //init new sorted array, this is a not-in-place sorting
+  let sorted = [];
+
+  //filling sorted array
+  for (let i = arr.length - 1; i >= 0; i--) {
+    j = arr[i]; // key
+    countArr[j] -= 1;
+    sorted[countArr[j]] = arr[i];
+    arrayAccess += 5;
+    await sleep(ms);
+    drawLine(sorted, countArr[j]);
+  }
+
+  //copy sortted array to global
+  global.array = sorted;
+
+  return [comparisons, arrayAccess];
+}

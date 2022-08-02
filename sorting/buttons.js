@@ -6,25 +6,28 @@ function initButtons() {
   button.mouseClicked(newNonLinearArray);
 
   button = createButton("Durstenfeld Shuffle");
-  button.mouseClicked(durstenfeldButton);
+  button.mouseClicked(durstenfeldShuffleButton);
 
   button = createButton("Bubble Sort");
-  button.mouseClicked(bubbleButton);
+  button.mouseClicked(bubbleSortButton);
 
   button = createButton("Selection Sort");
-  button.mouseClicked(selectionButton);
+  button.mouseClicked(selectionSortButton);
 
   button = createButton("Insertion Sort");
-  button.mouseClicked(insertionButton);
+  button.mouseClicked(insertionSortButton);
 
   button = createButton("Coctail Sort");
-  button.mouseClicked(coctailButton);
+  button.mouseClicked(coctailSortButton);
 
   button = createButton("Gnome Sort");
-  button.mouseClicked(gnomeButton);
+  button.mouseClicked(gnomeSortButton);
 
   button = createButton("Merge Sort");
-  button.mouseClicked(mergeButton);
+  button.mouseClicked(mergeSortButton);
+
+  button = createButton("Counting Sort");
+  button.mouseClicked(countingSortButton);
 }
 
 function printResults(message, ret, time) {
@@ -56,51 +59,58 @@ async function newNonLinearArray() {
   await drawArray(global.array, global.delay);
 }
 
-async function insertionButton() {
+async function insertionSortButton() {
   let startTime = new Date();
   let ret = await insertionSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Insertion sort: ", ret, endTime - startTime);
 }
 
-async function bubbleButton() {
+async function bubbleSortButton() {
   let startTime = new Date();
   let ret = await bubbleSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Bubble sort: ", ret, endTime - startTime);
 }
 
-async function selectionButton() {
+async function selectionSortButton() {
   let startTime = new Date();
   let ret = await selectionSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Selection sort: ", ret, endTime - startTime);
 }
 
-async function durstenfeldButton() {
+async function durstenfeldShuffleButton() {
   let startTime = new Date();
   let ret = await durstenfeldShuffle(global.array, global.delay);
   let endTime = new Date();
   printResults("Durstenfeld shuffle: ", ret, endTime - startTime);
 }
 
-async function coctailButton() {
+async function coctailSortButton() {
   let startTime = new Date();
   let ret = await coctailSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Coctail sort: ", ret, endTime - startTime);
 }
 
-async function gnomeButton() {
+async function gnomeSortButton() {
   let startTime = new Date();
   let ret = await gnomeSort(global.array, global.delay);
   let endTime = new Date();
   printResults("Gnome sort: ", ret, endTime - startTime);
 }
 
-async function mergeButton() {
+async function mergeSortButton() {
   let startTime = new Date();
   let ret = await mergeSortStart(global.array, global.ms);
   let endTime = new Date();
   printResults("Merge sort: ", ret, endTime - startTime);
+}
+
+async function countingSortButton() {
+  let startTime = new Date();
+  let ret = await countingSort(global.array, global.ms);
+  let endTime = new Date();
+  printResults("Counting sort: ", ret, endTime - startTime);
 }

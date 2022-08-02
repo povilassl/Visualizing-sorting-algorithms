@@ -9,6 +9,7 @@ Done so far:
 - Coctail Sort
 - Gnome Sort
 - Merge Sort
+- Counting Sort
 
 TODO:
 
@@ -17,3 +18,4 @@ TODO:
 - Update display of buttons / info
 - Check if there are better ways of handling delay
 - Move all delays to global.delay?
+- Recolor accessed elemets? for indication of process when nothing is replaced
