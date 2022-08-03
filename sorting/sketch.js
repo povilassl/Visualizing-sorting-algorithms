@@ -28,6 +28,7 @@ let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 async function draw() {
   translate(1, 1); //TODO: remove this when fixing UI
   background("black");
+  tint(0);
   global.inProgress = true;
   await drawArray(global.array, global.delay);
   global.inProgress = false;
