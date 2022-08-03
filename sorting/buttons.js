@@ -31,6 +31,9 @@ function initButtons() {
 
   button = createButton("Radix Sort");
   button.mouseClicked(radixSortButton);
+
+  button = createButton("Quick Sort");
+  button.mouseClicked(quickSortButton);
 }
 
 function printResults(message, ret, time) {
@@ -54,7 +57,6 @@ async function newLinearArrayButton() {
   if (!global.inProgress) {
     global.inProgress = true;
     global.array = fillArrayLinearValues(global.nrOfValues);
-    background("black");
     await drawArray(global.array, global.delay);
     global.inProgress = false;
   } else {
@@ -66,7 +68,6 @@ async function newNonLinearArray() {
   if (!global.inProgress) {
     global.inProgress = true;
     global.array = fillArrayRandomValues(global.nrOfValues);
-    background("black");
     await drawArray(global.array, global.delay);
     global.inProgress = false;
   } else {
@@ -185,6 +186,19 @@ async function radixSortButton() {
     let ret = await radixSort(global.array, global.ms);
     let endTime = new Date();
     printResults("Radix sort: ", ret, endTime - startTime);
+    global.inProgress = false;
+  } else {
+    console.log("Other process is currently in progress...");
+  }
+}
+
+async function quickSortButton() {
+  if (!global.inProgress) {
+    global.inProgress = true;
+    let startTime = new Date();
+    let ret = await quickSortStart(global.array, global.ms);
+    let endTime = new Date();
+    printResults("Quick sort: ", ret, endTime - startTime);
     global.inProgress = false;
   } else {
     console.log("Other process is currently in progress...");

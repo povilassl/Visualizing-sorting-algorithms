@@ -272,7 +272,7 @@ async function countingSort(arr, ms) {
   return [comparisons, arrayAccess];
 }
 
-async function countingSortForRadix(arr, n, exp, comparisons, arrayAccess) {
+async function countingSortForRadix(arr, n, exp, ms, comparisons, arrayAccess) {
   let output = new Array(n);
   let count = new Array(10).fill(0);
 
@@ -297,9 +297,9 @@ async function countingSortForRadix(arr, n, exp, comparisons, arrayAccess) {
 
   //copy sorted elements and draw
   for (let i = 0; i < n; i++) {
-    global.array[i] = output[i];
-    await sleep(global.delay);
-    drawLine(global.array, i);
+    arr[i] = output[i];
+    await sleep(ms);
+    drawLine(arr, i);
   }
 
   return [comparisons, arrayAccess];
@@ -326,10 +326,98 @@ async function radixSort(arr, ms) {
   //iterate every 10 elements
   //passing array, array.length and index
   for (let exp = 1; Math.floor(m / exp) > 0; exp *= 10) {
-    ret = await countingSortForRadix(arr, n, exp, comparisons, arrayAccess);
+    ret = await countingSortForRadix(arr, n, exp, ms, comparisons, arrayAccess);
     comparisons += ret[0];
     arrayAccess += ret[1];
   }
 
   return [comparisons, arrayAccess];
+}
+
+//divides array into to partitions
+async function partition(arr, low, high, ms, comparisons, arrayAccess) {
+  //results
+
+  let i = low;
+  let j = high;
+  let pivot = arr[low];
+
+  while (i < j) {
+    while (pivot >= arr[i]) {
+      i++;
+      comparisons++;
+      arrayAccess++;
+    }
+    while (pivot < arr[j]) {
+      j--;
+      comparisons++;
+      arrayAccess++;
+    }
+    if (i < j) {
+      await sleep(ms);
+      swapAndDraw(arr, i, j);
+      arrayAccess += 4;
+    }
+  }
+  comparisons += 2; // 2 while loops
+
+  await sleep(ms);
+  swapAndDraw(arr, low, j);
+  arrayAccess += 4;
+  return [j, comparisons, arrayAccess];
+
+  //problem with this (pivot = high) is that it takes
+  //extremely long to sort a sorted array, keeping as comment for later
+
+  //selects lasts element as the pivot
+  // let pivot = arr[high];
+
+  // //temp pivot index
+  // let i = low - 1;
+
+  // for (let j = low; j < high; j++) {
+  //   if (arr[j] < pivot) {
+  //     i++;
+  //     await sleep(global.delay);
+  //     swapAndDraw(arr, i, j);
+  //   }
+  // }
+  // i++;
+  // await sleep(global.delay);
+  // swapAndDraw(arr, i, high);
+}
+
+//sorts a (partition of an) array, divides into partitions, then sorts those
+async function quickSort(arr, low, high, ms, comparisons, arrayAccess) {
+  //ensure indices are in correct order
+  if (low < high) {
+    //partition array to get correct index
+    let ret;
+    ret = await partition(arr, low, high, ms, 0, 0);
+
+    //ret[0] stores pivot
+    let p = ret[0];
+
+    //add to results (arr[1] and arr[2])
+    comparisons += arr[1];
+    arrayAccess += arr[2];
+
+    //sort the two partitions
+    ret = await quickSort(arr, low, p - 1, ms, 0, 0); // left side of the pivot
+    comparisons += ret[0];
+    arrayAccess += ret[1];
+
+    ret = await quickSort(arr, p + 1, high, ms, 0, 0); // right side of the pivot
+    comparisons += ret[0];
+    arrayAccess += ret[1];
+    console.log(comparisons + " : " + arrayAccess);
+  }
+  return [comparisons, arrayAccess];
+}
+
+async function quickSortStart(arr, ms) {
+  let ret = await quickSort(arr, 0, arr.length - 1, ms, 0, 0);
+  // drawArray(arr, ms);
+
+  return [ret[0], ret[1]];
 }

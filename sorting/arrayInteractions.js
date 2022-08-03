@@ -1,12 +1,7 @@
 async function drawArray(arr, ms) {
   for (let i = 0; i < arr.length; i++) {
-    // await sleep(ms);
-    line(
-      global.blockWidth * i,
-      height,
-      global.blockWidth * i,
-      height - global.blockHeight * arr[i]
-    );
+    await sleep(ms);
+    drawLine(arr, i);
   }
 }
 
@@ -26,9 +21,11 @@ function drawLines(arr, x, y) {
 }
 
 function drawLine(arr, index) {
+  //draw a black full height line
   stroke("black");
   line(global.blockWidth * index, height, global.blockWidth * index, 0);
 
+  //draw real value line - this way its gradual drawing
   stroke("white");
   line(
     global.blockWidth * index,
@@ -62,6 +59,7 @@ function swap(arr, x, y) {
   arr[y] = temp;
 }
 
+//maybe move await sleep(ms) here?
 //array access = +4
 function swapAndDraw(arr, x, y) {
   stroke("black");

@@ -11,13 +11,15 @@ Done so far:
 - Merge Sort
 - Counting Sort
 - Radix Sort
+- Quick Sort
 
 TODO:
 
-- Better logic for drawing lines?
+- Quick sort ret looks too low
 - Update display of buttons / info
 - Check if there are better ways of handling delay
 - Move all delays to global.delay?
-- Recolor accessed elemets? for indication of process when nothing is replaced
+- Recolor accessed elements? for indication of process when nothing is replaced
 - better way of implementing function execution blocks?
 - Check if I'm doing array access and comparisons correctly
+- Maybe add array of strings visualizations? would work for radix sort ([asd, adsasd, ddsad, ...)
